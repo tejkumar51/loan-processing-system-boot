@@ -1,9 +1,7 @@
 package com.osi.loan.configuration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.osi.loan.aspect.CachingAdvice;
 import com.osi.loan.dao.UserDAO;
@@ -12,8 +10,7 @@ import com.osi.loan.service.UserService;
 import com.osi.loan.service.impl.UserServiceImpl;
 
 @Configuration
-@EnableTransactionManagement
-@EnableAspectJAutoProxy
+@EnableJpaRepositories("com.osi.loan.repository.jpa")
 public class UserConfiguration {
 
 	// Will be created by Spring Boot from data source properties
@@ -31,21 +28,22 @@ public class UserConfiguration {
 	 * new JdbcTemplate(); jdbcTemplate.setDataSource(dataSource()); return
 	 * jdbcTemplate; }
 	 */
-	@Bean
+	// @Bean
 	public UserDAO userDao() {
 		return new UserDAOImpl();
 	}
 
-	@Bean
+	// @Bean
 	public UserService userService() {
 		return new UserServiceImpl();
 	}
 
-	@Bean
+	// @Bean
 	public CachingAdvice cachingAdvice() {
 		return new CachingAdvice();
 	}
 
+	// Will be created by Spring Boot from data source properties
 	/*
 	 * @Bean public DataSourceTransactionManager dataSourceTransactionManager()
 	 * { DataSourceTransactionManager dataSourceTransactionManager = new

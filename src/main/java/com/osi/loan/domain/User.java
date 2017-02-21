@@ -1,11 +1,25 @@
 package com.osi.loan.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
 public class User {
+	@Id
+	@Column(name = "USER_ID")
 	private int userId;
+	@Column(name = "USERNAME")
 	private String userName;
+	@Column(name = "PASSWORD")
 	private String password;
+	@Column(name = "MOBILE")
 	private String mobile;
+	@Column(name = "EMAIL")
 	private String email;
+	@Column(name = "USERTYPE")
 	private String userType;
 
 	public User() {

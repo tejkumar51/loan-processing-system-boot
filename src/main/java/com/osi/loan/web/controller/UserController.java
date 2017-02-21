@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.osi.loan.domain.User;
+import com.osi.loan.repository.jpa.UserRepository;
 import com.osi.loan.service.UserService;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
 
-	public UserService getUserService() {
-		return userService;
+	public UserRepository getUserRepository() {
+		return userRepository;
 	}
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
+
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(Model model) {
@@ -34,11 +36,12 @@ public class UserController {
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public String addUser(User user) {
-		userService.addUser(user);
+		// userService.addUser(user);
+		userRepository.save(user);
 		return "useradded";
 	}
 
-	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
 	public String findUser(Model model) {
 		User user = new User();
 		List<String> userNameList = userService.getAllUserNames();
@@ -70,6 +73,6 @@ public class UserController {
 	public List<String> userTypeList() {
 		List<String> userTypeList = userService.getAllUserNames();
 		return userTypeList;
-	}
+	}*/
 
 }
